@@ -15,7 +15,7 @@ func main() {
 }
 ```
 
-包是结构化代码的一种方式：每个程序都由包（通常简称为 pkg）的概念组成，可以使用自身的包或者从其它包中导入内容。
+包是结构化代码的一种方式：每个程序都由包（pkg）的概念组成，可以使用自身的包或者从其它包中导入内容。
 
 如同其它一些编程语言中的类库或命名空间的概念，每个 Go 文件都属于且仅属于一个包。一个包可以由许多以 `.go` 为扩展名的源文件组成，因此文件名和包名一般来说都是不相同的。
 
@@ -42,19 +42,13 @@ import "os"
 import "fmt"; import "os"
 ```
 
-但是还有更短且更优雅的方法（被称为因式分解关键字，该方法同样适用于 const、var 和 type 的声明或定义）：
+或更短且更优雅的方法（该方法同样适用于 const、var 和 type 的声明或定义）：
 
 ```go
 import (
    "fmt"
    "os"
 )
-```
-
-它甚至还可以更短的形式，但使用 gofmt 后将会被强制换行：
-
-```go
-import ("fmt"; "os")
 ```
 
 当你导入多个包时，最好按照字母顺序排列包名，这样做更加清晰易读。
@@ -79,7 +73,7 @@ import ("fmt"; "os")
 
 你可以通过使用包的别名来解决包名之间的名称冲突，或者说根据你的个人喜好对包名进行重新设置，如：`import fm "fmt"`。下面的代码展示了如何使用包的别名：
 
-示例 4.2 [alias.go](examples/chapter_4/alias.go)
+示例 [alias.go](examples/chapter_4/alias.go)
 
 ```go
 package main
@@ -97,7 +91,7 @@ func main() {
 
 **包的分级声明和初始化**
 
-你可以在使用 `import` 导入包之后定义或声明 0 个或多个常量（const）、变量（var）和类型（type），这些对象的作用域都是全局的（在本包范围内），所以可以被本包中所有的函数调用（如 [gotemplate.go](examples/chapter_4/gotemplate.go) 源文件中的 c 和 v），然后声明一个或多个函数（func）。
+你可以在使用 `import` 导入包之后定义或声明 0 个或多个常量（const）、变量（var）和类型（type），这些对象的作用域都是全局的（在本包范围内），所以可以被本包中所有的函数调用，然后声明一个或多个函数（func）。
 
 ## 1.1.2 函数
 
@@ -168,7 +162,7 @@ fmt.Println（"hello, world"）
 
 ## 1.1.3 注释
 
-示例 4.2 [hello_world2.go](examples/chapter_4/hello_world2.go)
+示例 [hello_world2.go](examples/chapter_4/hello_world2.go)
 
 ```go
 package main
@@ -210,7 +204,7 @@ func enterOrbit() error {
 }
 ```
 
-godoc 工具（第 3.6 节）会收集这些注释并产生一个技术文档。
+godoc 工具会收集这些注释并产生一个技术文档。
 
 ## 1.1.4 类型
 
@@ -238,7 +232,7 @@ return var
 func FunctionName (a typea, b typeb) (t1 type1, t2 type2)
 ```
 
-示例： 函数 Atoi (第 4.7 节)：`func Atoi(s string) (i int, err error)`
+示例： 函数 Atoi：`func Atoi(s string) (i int, err error)`
 
 返回的形式：
 
@@ -262,7 +256,7 @@ type IZ int
 var a IZ = 5
 ```
 
-这里我们可以看到 int 是变量 a 的底层类型，这也使得它们之间存在相互转换的可能（第 4.2.6 节）。
+这里我们可以看到 int 是变量 a 的底层类型，这也使得它们之间存在相互转换的可能。
 
 如果你有多个类型需要定义，可以使用因式分解关键字的方式，例如：
 
@@ -287,7 +281,7 @@ type (
 - 如果当前包是 main 包，则定义 main 函数。
 - 然后定义其余的函数，首先是类型的方法，接着是按照 main 函数中先后调用的顺序来定义相关函数，如果有很多函数，则可以按照字母顺序来进行排序。
 
-示例 4.4 [gotemplate.go](examples/chapter_4/gotemplate.go)
+示例 [gotemplate.go](examples/chapter_4/gotemplate.go)
 
 ```go
 package main
@@ -355,7 +349,7 @@ c := int(a)
 d := IZ(c)
 ```
 
-# 4.3 常量
+# 1.2 常量
 
 常量使用关键字 `const` 定义，用于存储不会改变的数据。
 
@@ -478,9 +472,9 @@ const (
 ```
 
 
-# 4.4 变量
+# 1.3 变量
 
-## 4.4.1 简介
+## 1.3.1 简介
 
 声明变量的一般形式是使用 `var` 关键字：`var identifier type`。
 
@@ -591,7 +585,7 @@ a := 1
 
 下面这个例子展示了如何通过`runtime`包在运行时获取所在的操作系统类型，以及如何通过 `os` 包中的函数 `os.Getenv()` 来获取环境变量中的值，并保存到 string 类型的局部变量 path 中。
 
-示例 4.5 [goos.go](examples/chapter_4/goos.go)
+示例 [goos.go](examples/chapter_4/goos.go)
 
 ```go
 package main
@@ -612,17 +606,17 @@ func main() {
 
 如果你在 Windows 下运行这段代码，则会输出 `The operating system is: windows` 以及相应的环境变量的值；如果你在 Linux 下运行这段代码，则会输出 `The operating system is: linux` 以及相应的的环境变量的值。
 
-这里用到了 `Printf` 的格式化输出的功能（第 4.4.3 节）。
+这里用到了 `Printf` 的格式化输出的功能。
 
 
-## 4.4.3 打印
+## 1.3.2 打印
 函数 `Printf` 可以在 fmt 包外部使用，这是因为它以大写字母 P 开头，该函数主要用于打印输出到控制台。通常使用的格式化字符串作为第一个参数：
 
 ```go
 func Printf(format string, list of variables to be printed)
 ```
 
-在示例 4.5 中，格式化字符串为：`"The operating system is: %s\n"`。
+在示例中，格式化字符串为：`"The operating system is: %s\n"`。
 
 这个格式化字符串可以含有一个或多个的格式化标识符，例如：`%..`，其中 `..` 可以被不同类型所对应的标识符替换，如 `%s` 代表字符串标识符、`%v` 代表使用类型的默认输出格式的标识符。这些标识符所对应的值从格式化字符串后的第一个逗号开始按照相同顺序添加，如果参数超过 1 个则同样需要使用逗号分隔。使用这些占位符可以很好地控制格式化输出的文本。
 
@@ -636,7 +630,7 @@ fmt.Print("Hello:", 23)
 
 将输出：`Hello: 23`。
 
-## 4.4.4 简短形式，使用 := 赋值操作符
+## 1.3.3 简短形式，使用 := 赋值操作符
 
 我们知道可以在变量的初始化时省略变量的类型而由系统自动推断，而这个时候再在 Example 4.4.1 的最后一个声明语句写上 `var` 关键字就显得有些多余了，因此我们可以将它们简写为 `a := 50` 或 `b := false`。
 
@@ -701,7 +695,7 @@ a, b, c := 5, 7, "abc"
 
 并行赋值也被用于当一个函数返回多个返回值时，比如这里的 `val` 和错误 `err` 是通过调用 `Func1` 函数同时得到：`val, err = Func1(var1)`。
 
-## 4.4.5 init 函数
+## 1.3.4 init 函数
 
 变量除了可以在全局声明中初始化，也可以在 init 函数中初始化。这是一类非常特殊的函数，它不能够被人为调用，而是在每个包完成初始化后自动执行，并且执行优先级比 main 函数高。
 
@@ -709,7 +703,7 @@ a, b, c := 5, 7, "abc"
 
 一个可能的用途是在开始执行程序之前对数据进行检验或修复，以保证程序状态的正确性。
 
-示例 4.6 [init.go](examples/chapter_4/init.go):
+示例 [init.go](examples/chapter_4/init.go):
 
 ```go
 package trans
@@ -725,7 +719,7 @@ func init() {
 
 在它的 init 函数中计算变量 Pi 的初始值。
 
-示例 4.7 [user_init.go](examples/chapter_4/user_init.go) 中导入了包 trans（需要init.go目录为./trans/init.go）并且使用到了变量 Pi：
+示例 [user_init.go](examples/chapter_4/user_init.go) 中导入了包 trans（需要init.go目录为./trans/init.go）并且使用到了变量 Pi：
 
 ```go
 package main
@@ -751,8 +745,7 @@ func init() {
 }
 ```
 
-
-# 4.5 基本类型和运算符
+# 1.4 基本类型和运算符
 
 我们将在这个部分讲解有关布尔型、数字型和字符型的相关知识。
 
@@ -760,9 +753,9 @@ func init() {
 
 一元运算符只可以用于一个值的操作（作为后缀），而二元运算符则可以和两个值或者操作数结合（作为中缀）。
 
-只有两个类型相同的值才可以和二元运算符结合，另外要注意的是，Go 是强类型语言，因此不会进行隐式转换，任何不同类型之间的转换都必须显式说明（第 4.2 节）。Go 不存在像 C 和 Java 那样的运算符重载，表达式的解析顺序是从左至右。
+只有两个类型相同的值才可以和二元运算符结合，另外要注意的是，Go 是强类型语言，因此不会进行隐式转换，任何不同类型之间的转换都必须显式说明。Go 不存在像 C 和 Java 那样的运算符重载，表达式的解析顺序是从左至右。
 
-## 4.5.1 布尔类型 bool
+## 1.4.1 布尔类型 bool
 
 一个简单的例子：`var b bool = true`。
 
@@ -796,13 +789,13 @@ Go 对于值之间的比较有非常严格的限制，只有两个类型相同�
 
 在格式化输出时，你可以使用 `%t` 来表示你要输出的值为布尔型。
 
-布尔值（以及任何结果为布尔值的表达式）最常用在条件结构的条件语句中，例如：if、for 和 switch 结构（第 5 章）。
+布尔值（以及任何结果为布尔值的表达式）最常用在条件结构的条件语句中，例如：if、for 和 switch 结构。
 
-对于布尔值的好的命名能够很好地提升代码的可读性，例如以 `is` 或者 `Is` 开头的 `isSorted`、`isFinished`、`isVisible`，使用这样的命名能够在阅读代码的获得阅读正常语句一样的良好体验，例如标准库中的 `unicode.IsDigit(ch)`（第 4.5.5 节）。
+对于布尔值的好的命名能够很好地提升代码的可读性，例如以 `is` 或者 `Is` 开头的 `isSorted`、`isFinished`、`isVisible`，使用这样的命名能够在阅读代码的获得阅读正常语句一样的良好体验，例如标准库中的 `unicode.IsDigit(ch)`。
 
-## 4.5.2 数字类型
+## 1.4.2 数字类型
 
-### 4.5.2.1 整型 int 和浮点型 float
+### 1.4.2.1 整型 int 和浮点型 float
 
 Go 语言支持整型和浮点型数字，并且原生支持复数，其中位的运算采用补码（详情参见 [二的补码](http://en.wikipedia.org/wiki/Two's_complement) 页面）。
 
@@ -850,7 +843,7 @@ float32 精确到小数点后 7 位，float64 精确到小数点后 15 位。由
 
 Go 中不允许不同类型之间的混合使用，但是对于常量的类型限制非常少，因此允许常量之间的混合使用，下面这个程序很好地解释了这个现象（该程序无法通过编译）：
 
-示例 4.8 [type_mixing.go](examples/chapter_4/type_mixing.go)
+示例 [type_mixing.go](examples/chapter_4/type_mixing.go)
 
 ```go
 package main
@@ -868,9 +861,9 @@ func main() {
 
 同样地，int16 也不能够被隐式转换为 int32。
 
-下面这个程序展示了通过显式转换来避免这个问题（第 4.2 节）。
+下面这个程序展示了通过显式转换来避免这个问题。
 
-示例 4.9 [casting.go](examples/chapter_4/casting.go)
+示例 [casting.go](examples/chapter_4/casting.go)
 
 ```go
 package main
@@ -930,11 +923,10 @@ func IntFromFloat64(x float64) int {
 }
 ```
 
-不过如果你实际存的数字超出你要转换到的类型的取值范围的话，则会引发 panic（第 13.2 节）。
+不过如果你实际存的数字超出你要转换到的类型的取值范围的话，则会引发 panic。
 
-**问题 4.1** int 和 int64 是相同的类型吗？
 
-### 4.5.2.2 复数
+### 1.4.2.2 复数
 
 Go 拥有以下复数类型：
 
@@ -963,7 +955,7 @@ c = complex(re, im)
 
 复数支持和其它数字类型一样的运算。当你使用等号 `==` 或者不等号 `!=` 对复数进行比较运算时，注意对精确度的把握。`cmath` 包中包含了一些操作复数的公共方法。如果你对内存的要求不是特别高，最好使用 complex128 作为计算类型，因为相关函数都使用这个类型的参数。
 
-### 4.5.2.3 位运算
+### 1.4.2.3 位运算
 
 位运算只能用于整数类型的变量，且需当它们拥有等长位模式时。
 
@@ -1056,9 +1048,9 @@ const (
 flag := Active | Send // == 3
 ```
 
-### 4.5.2.4 逻辑运算符
+### 1.4.2.4 逻辑运算符
 
-Go 中拥有以下逻辑运算符：`==`、`!=`（第 4.5.1 节）、`<`、`<=`、`>`、`>=`。
+Go 中拥有以下逻辑运算符：`==`、`!=` 、`<`、`<=`、`>`、`>=`。
 
 它们之所以被称为逻辑运算符是因为它们的运算结果总是为布尔值 `bool`。例如：
 
@@ -1066,7 +1058,7 @@ Go 中拥有以下逻辑运算符：`==`、`!=`（第 4.5.1 节）、`<`、`<=`�
 b3:= 10 > 5 // b3 is true
 ```
 
-### 4.5.2.5 算术运算符
+### 1.4.2.5 算术运算符
 
 常见可用于整数和浮点数的二元运算符有 `+`、`-`、`*` 和 `/`。
 
@@ -1080,8 +1072,6 @@ b3:= 10 > 5 // b3 is true
 
 浮点数除以 0.0 会返回一个无穷尽的结果，使用 `+Inf` 表示。
 
-**练习 4.4** 尝试编译 [divby0.go](exercises/chapter_4/divby0.go)。
-
 你可以将语句 `b = b + a` 简写为 `b+=a`，同样的写法也可用于 `-=`、`*=`、`/=`、`%=`。
 
 对于整数和浮点数，你可以使用一元运算符 `++`（递增）和 `--`（递减），但只能用于后缀：
@@ -1093,11 +1083,11 @@ b3:= 10 > 5 // b3 is true
 
 在运算时 **溢出** 不会产生错误，Go 会简单地将超出位数抛弃。如果你需要范围无限大的整数或者有理数（意味着只被限制于计算机内存），你可以使用标准库中的 `big` 包，该包提供了类似 `big.Int` 和 `big.Rat` 这样的类型（第 9.4 节）。
 
-### 4.5.2.6 随机数
+### 1.4.2.6 随机数
 
 一些像游戏或者统计学类的应用需要用到随机数。`rand` 包实现了伪随机数的生成。
 
-示例 4.10 [random.go](examples/chapter_4/random.go) 演示了如何生成 10 个非负随机数：
+示例 [random.go](examples/chapter_4/random.go) 演示了如何生成 10 个非负随机数：
 
 ```go
 package main
@@ -1133,9 +1123,9 @@ func main() {
 
 函数 `rand.Float32` 和 `rand.Float64` 返回介于 [0.0, 1.0) 之间的伪随机数，其中包括 0.0 但不包括 1.0。函数 `rand.Intn` 返回介于 [0, n) 之间的伪随机数。
 
-你可以使用 `Seed(value)` 函数来提供伪随机数的生成种子，一般情况下都会使用当前时间的纳秒级数字（第 4.8 节）。
+你可以使用 `Seed(value)` 函数来提供伪随机数的生成种子，一般情况下都会使用当前时间的纳秒级数字。
 
-## 4.5.3 运算符与优先级
+## 1.4.3 运算符与优先级
 
 有些运算符拥有较高的优先级，二元运算符的运算方向均是从左至右。下表列出了所有运算符以及它们的优先级，由上至下代表优先级由高到低：
 
@@ -1150,13 +1140,13 @@ func main() {
 
 当然，你可以通过使用括号来临时提升某个表达式的整体运算优先级。
 
-## 4.5.4 类型别名
+## 1.4.4 类型别名
 
 当你在使用某个类型时，你可以给它起另一个名字，然后你就可以在你的代码中使用新的名字（用于简化名称或解决名称冲突）。
 
 在 `type TZ int` 中，TZ 就是 int 类型的新名称（用于表示程序中的时区），然后就可以使用 TZ 来操作 int 类型的数据。
 
-示例 4.11 [type.go](examples/chapter_4/type.go)
+示例 [type.go](examples/chapter_4/type.go)
 
 ```go
 package main
@@ -1171,9 +1161,9 @@ func main() {
 }
 ```
 
-实际上，类型别名得到的新类型并非和原类型完全相同，新类型不会拥有原类型所附带的方法（第 10 章）；TZ 可以自定义一个方法用来输出更加人性化的时区信息。
+实际上，类型别名得到的新类型并非和原类型完全相同，新类型不会拥有原类型所附带的方法；TZ 可以自定义一个方法用来输出更加人性化的时区信息。
 
-## 4.5.5 字符类型
+## 1.4.5 字符类型
 
 严格来说，这并不是 Go 语言的一个类型，字符只是整数的特殊用例。`byte` 类型是 `uint8` 的别名，对于只占用 1 个字节的传统 ASCII 编码的字符来说，完全没有问题。例如：`var ch byte = 'A'`；字符使用单引号括起来。
 
@@ -1193,7 +1183,7 @@ var ch byte = 65 或 var ch byte = '\x41'
 
 因为 Unicode 至少占用 2 个字节，所以我们使用 `int16` 或者 `int` 类型来表示。如果需要使用到 4 字节，则会加上 `\U` 前缀；前缀 `\u` 则总是紧跟着长度为 4 的 16 进制数，前缀 `\U` 紧跟着长度为 8 的 16 进制数。
 
-示例 4.12 [char.go](examples/chapter_4/char.go)
+示例 [char.go](examples/chapter_4/char.go)
 
 ```go
 var ch int = '\u0041'
@@ -1222,7 +1212,7 @@ fmt.Printf("%U - %U - %U", ch, ch2, ch3) // UTF-8 code point
 
 这些函数返回一个布尔值。包 `utf8` 拥有更多与 rune 相关的函数。
 
-# 4.6 字符串
+# 1.5 字符串
 
 字符串是 UTF-8 字符的一个序列（当字符为 ASCII 码时则占用 1 个字节，其它字符根据需要占用 2-4 个字节）。UTF-8 是被广泛使用的编码格式，是文本文件的标准编码，其它包括 XML 和 JSON 在内，也都使用该编码。由于该编码对占用字节长度的不定性，Go 中的字符串也可能根据需要占用 1 至 4 个字节（示例见第 4.6 节），这与其它语言如 C++、Java 或者 Python 不同（Java 始终使用 2 个字节）。Go 这样做的好处是不仅减少了内存和硬盘空间占用，同时也不用像其它语言那样需要对使用 UTF-8 字符集的文本进行编码和解码。
 
@@ -1285,15 +1275,15 @@ s += "world!"
 fmt.Println(s) //输出 “hello, world!”
 ```
 
-在循环中使用加号 `+` 拼接字符串并不是最高效的做法，更好的办法是使用函数 `strings.Join()`（第 4.7.10 节），有没有更好地办法了？有！使用字节缓冲（`bytes.Buffer`）拼接更加给力（第 7.2.6 节）！
+在循环中使用加号 `+` 拼接字符串并不是最高效的做法，更好的办法是使用函数 `strings.Join()`，有没有更好地办法了？有！使用字节缓冲（`bytes.Buffer`）拼接更加给力！
 
-在第 7 章，我们会讲到通过将字符串看作是字节（byte）的切片（slice）来实现对其标准索引法的操作。会在第 5.4.1 节中讲到的 for 循环只会根据索引返回字符串中的纯字节，而在第 5.4.4 节（以及第 7.6.1 节的示例）将会展示如何使用 for-range 循环来实现对 Unicode 字符串的迭代操作。在下一节，我们会学习到许多有关字符串操作的函数和方法，同时 `fmt` 包中的 `fmt.Sprint(x)` 也可以格式化生成并返回你所需要的字符串（第 4.4.3 节）。
+在第 7 章，我们会讲到通过将字符串看作是字节（byte）的切片（slice）来实现对其标准索引法的操作。for 循环只会根据索引返回字符串中的纯字节，而在第 5.4.4 节将会展示如何使用 for-range 循环来实现对 Unicode 字符串的迭代操作。在下一节，我们会学习到许多有关字符串操作的函数和方法，同时 `fmt` 包中的 `fmt.Sprint(x)` 也可以格式化生成并返回你所需要的字符串。
 
-# 4.7 strings 和 strconv 包
+# 1.6 strings 和 strconv 包
 
 作为一种基本数据结构，每种语言都有一些对于字符串的预定义处理函数。Go 中使用 `strings` 包来完成对字符串的主要操作。
 
-## 4.7.1 前缀和后缀
+## 1.6.1 前缀和后缀
 
 `HasPrefix` 判断字符串 `s` 是否以 `prefix` 开头：
 
@@ -1330,7 +1320,7 @@ func main() {
 
 这个例子同样演示了转义字符 `\` 和格式化字符串的使用。
 
-## 4.7.2 字符串包含关系
+## 1.6.2 字符串包含关系
 
 `Contains` 判断字符串 `s` 是否包含 `substr`：
 
@@ -1338,7 +1328,7 @@ func main() {
 strings.Contains(s, substr string) bool
 ```
 
-## 4.7.3 判断子字符串或字符在父字符串中出现的位置（索引）
+## 1.6.3 判断子字符串或字符在父字符串中出现的位置（索引）
 
 `Index` 返回字符串 `str` 在字符串 `s` 中的索引（`str` 的第一个字符的索引），-1 表示字符串 `s` 不包含字符串 `str`：
 
@@ -1361,7 +1351,7 @@ strings.IndexRune(s string, r rune) int
   该方法在最新版本的 Go 中定义为 func IndexRune(s string, r rune) int
   实际使用中的第二个参数 rune 可以是 rune 或 int, 例如 strings.IndexRune("chicken", 99) 或 strings.IndexRune("chicken", rune('k'))
 
-示例 4.14 [index_in_string.go](examples/chapter_4/index_in_string.go)
+示例 [index_in_string.go](examples/chapter_4/index_in_string.go)
 
 ```go
 package main
@@ -1394,7 +1384,7 @@ func main() {
   The position of the last instance of "Hi" is: 14
   The position of "Burger" is: -1
 
-## 4.7.4 字符串替换
+## 1.6.4 字符串替换
 
 `Replace` 用于将字符串 `str` 中的前 `n` 个字符串 `old` 替换为字符串 `new`，并返回一个新的字符串，如果 `n = -1` 则替换所有字符串 `old` 为字符串 `new`：
 
@@ -1402,7 +1392,7 @@ func main() {
 strings.Replace(str, old, new, n) string
 ```
 
-## 4.7.5 统计字符串出现次数
+## 1.6.5 统计字符串出现次数
 
 `Count` 用于计算字符串 `str` 在字符串 `s` 中出现的非重叠次数：
 
@@ -1410,7 +1400,7 @@ strings.Replace(str, old, new, n) string
 strings.Count(s, str string) int
 ```
 
-示例 4.15 [count_substring.go](examples/chapter_4/count_substring.go)
+示例 [count_substring.go](examples/chapter_4/count_substring.go)
 
 ```go
 package main
@@ -1437,7 +1427,7 @@ func main() {
   Number of H's in Hello, how is it going, Hugo? is: 2
   Number of double g’s in gggggggggg is: 5
 
-## 4.7.6 重复字符串
+## 1.6.6 重复字符串
 
 `Repeat` 用于重复 `count` 次字符串 `s` 并返回一个新的字符串：
 
@@ -1445,7 +1435,7 @@ func main() {
 strings.Repeat(s, count int) string
 ```
 
-示例 4.16 [repeat_string.go](examples/chapter_4/repeat_string.go)
+示例 [repeat_string.go](examples/chapter_4/repeat_string.go)
 
 ```go
 package main
@@ -1468,7 +1458,7 @@ func main() {
 
   The new repeated string is: Hi there! Hi there! Hi there!
 
-## 4.7.7 修改字符串大小写
+## 1.6.7 修改字符串大小写
 
 `ToLower` 将字符串中的 Unicode 字符全部转换为相应的小写字符：
 
@@ -1482,7 +1472,7 @@ strings.ToLower(s) string
 strings.ToUpper(s) string
 ```
 
-示例 4.17 [toupper_lower.go](examples/chapter_4/toupper_lower.go)
+示例 [toupper_lower.go](examples/chapter_4/toupper_lower.go)
 
 ```go
 package main
@@ -1511,11 +1501,11 @@ func main() {
   The lowercase string is: hey, how are you george?
   The uppercase string is: HEY, HOW ARE YOU GEORGE?
 
-## 4.7.8 修剪字符串
+## 1.6.8 修剪字符串
 
 你可以使用 `strings.TrimSpace(s)` 来剔除字符串开头和结尾的空白符号；如果你想要剔除指定字符，则可以使用 `strings.Trim(s, "cut")` 来将开头和结尾的 `cut` 去除掉。该函数的第二个参数可以包含任何字符，如果你只想剔除开头或者结尾的字符串，则可以使用 `TrimLeft` 或者 `TrimRight` 来实现。
 
-## 4.7.9 分割字符串
+## 1.6.9 分割字符串
 
 `strings.Fields(s)` 将会利用 1 个或多个空白符号来作为动态长度的分隔符将字符串分割成若干小块，并返回一个 slice，如果字符串只包含空白符号，则返回一个长度为 0 的 slice。
 
@@ -1523,7 +1513,7 @@ func main() {
 
 因为这 2 个函数都会返回 slice，所以习惯使用 for-range 循环来对其进行处理（第 7.3 节）。
 
-## 4.7.10 拼接 slice 到字符串
+## 1.6.10 拼接 slice 到字符串
 
 `Join` 用于将元素类型为 string 的 slice 使用分割符号来拼接组成一个字符串：
 
@@ -1531,7 +1521,7 @@ func main() {
 strings.Join(sl []string, sep string) string
 ```
 
-示例 4.18 [strings_splitjoin.go](examples/chapter_4/strings_splitjoin.go)
+示例 [strings_splitjoin.go](examples/chapter_4/strings_splitjoin.go)
 
 ```go
 package main
@@ -1569,16 +1559,14 @@ func main() {
   GO1 - The ABC of Go - 25 -
   sl2 joined by ;: GO1;The ABC of Go;25
 
-其它有关字符串操作的文档请参阅 [官方文档](http://golang.org/pkg/strings/)（ **译者注：国内用户可访问 [该页面](http://docs.studygolang.com/pkg/strings/)** ）。
-
-## 4.7.11 从字符串中读取内容
+## 1.6.11 从字符串中读取内容
 
 函数 `strings.NewReader(str)` 用于生成一个 `Reader` 并读取字符串中的内容，然后返回指向该 `Reader` 的指针，从其它类型读取内容的函数还有：
 
 - `Read()` 从 []byte 中读取内容。
 - `ReadByte()` 和 `ReadRune()` 从字符串中读取下一个 byte 或者 rune。
 
-## 4.7.12 字符串与其它类型的转换
+## 1.6.12 字符串与其它类型的转换
 
 与字符串相关的类型转换都是通过 `strconv` 包实现的。
 
@@ -1604,7 +1592,7 @@ func main() {
 
 在下面这个示例中，我们忽略可能出现的转换错误：
 
-示例 4.19 [string_conversion.go](examples/chapter_4/string_conversion.go)
+示例 [string_conversion.go](examples/chapter_4/string_conversion.go)
 
 ```go
 package main
@@ -1639,7 +1627,7 @@ func main() {
   The new string is: 671
 
 
-# 4.8 时间和日期
+# 1.7 时间和日期
 
 `time` 包为我们提供了一个数据类型 `time.Time`（作为值使用）以及显示和测量时间和日期的功能函数。
 
@@ -1661,7 +1649,7 @@ fmt.Println(t.Format("02 Jan 2006 15:04"))
 
 其它有关时间操作的文档请参阅 [官方文档](http://golang.org/pkg/time/)（ **译者注：国内用户可访问 [该页面](http://docs.studygolang.com/pkg/time/)** ）。
 
-示例 4.20 [time.go](examples/chapter_4/time.go)
+示例 [time.go](examples/chapter_4/time.go)
 
 ```go
 package main
@@ -1698,7 +1686,7 @@ func main() {
 如果你需要在应用程序在经过一定时间或周期执行某项任务（事件处理的特例），则可以使用 `time.After` 或者 `time.Ticker`：我们将会在第 14.5 节讨论这些有趣的事情。 另外，`time.Sleep（Duration d）` 可以实现对某个进程（实质上是 goroutine）时长为 d 的暂停。
 
 
-# 4.9 指针
+# 1.8 指针
 
 Go 语言为程序员提供了控制数据结构的指针的能力；但是，你不能进行指针运算。通过给予程序员基本内存布局，Go 语言允许你控制特定集合的数据结构、分配的数量以及内存访问模式，这些对构建运行良好的系统是非常重要的：指针对于性能的影响是不言而喻的，而如果你想要做的是系统编程、操作系统或者网络应用，指针更是不可或缺的一部分。
 
@@ -1706,7 +1694,7 @@ Go 语言为程序员提供了控制数据结构的指针的能力；但是，�
 
 Go 语言的取地址符是 `&`，放到一个变量前使用就会返回相应变量的内存地址。
 
-下面的代码片段（示例 4.9 [pointer.go](examples/chapter_4/pointer.go)）可能输出 `An integer: 5, its location in memory: 0x6b0820`（这个值随着你每次运行程序而变化）。
+下面的代码片段可能输出 `An integer: 5, its location in memory: 0x6b0820`（这个值随着你每次运行程序而变化）。
 
 ```go
 var i1 = 5
@@ -1741,7 +1729,7 @@ intP 存储了 i1 的内存地址；它指向了 i1 的位置，它引用了变�
 
 现在，我们应当能理解 pointer.go 的全部内容及其输出：
 
-示例 4.21 [pointer.go](examples/chapter_4/pointer.go):
+示例 [pointer.go](examples/chapter_4/pointer.go):
 
 ```go
 package main
@@ -1764,7 +1752,7 @@ func main() {
 
 它展示了分配一个新的值给 \*p 并且更改这个变量自己的值（这里是一个字符串）。
 
-示例 4.22 [string_pointer.go](examples/chapter_4/string_pointer.go)
+示例 [string_pointer.go](examples/chapter_4/string_pointer.go)
 
 ```go
 package main
@@ -1811,7 +1799,7 @@ ptr2 := &10 //error: cannot take the address of 10
 
 对一个空指针的反向引用是不合法的，并且会使程序崩溃：
 
-示例 4.23 [testcrash.go](examples/chapter_4/testcrash.go):
+示例 [testcrash.go](examples/chapter_4/testcrash.go):
 
 ```go
 package main
