@@ -511,10 +511,6 @@ func main() {
     1 2 3 4
     {1 2}
 
-**练习 10.5** anonymous_struct.go：
-
-创建一个结构体，它有一个具名的 float 字段，2 个匿名字段，类型分别是 int 和 string。通过结构体字面量新建一个结构体实例并打印它的内容。
-
 ## 10.5.3 命名冲突
 
 当两个字段拥有相同的名字（可能是继承来的名字）时该怎么办呢？
@@ -644,30 +640,6 @@ func (v IntVector) Sum() (s int) {
 
 func main() {
   fmt.Println(IntVector{1, 2, 3}.Sum()) // 输出是6
-}
-```
-
-**练习 10.6** employee_salary.go
-
-定义结构体 `employee`，它有一个 `salary` 字段，给这个结构体定义一个方法 `giveRaise` 来按照指定的百分比增加薪水。
-
-**练习 10.7** iteration_list.go
-
-下面这段代码有什么错？
-
-```go
-package main
-
-import "container/list"
-
-func (p *list.List) Iter() {
-  // ...
-}
-
-func main() {
-  lst := new(list.List)
-  for _= range lst.Iter() {
-  }
 }
 ```
 
@@ -887,7 +859,7 @@ func main() {
 
 当一个匿名类型被内嵌在结构体中时，匿名类型的可见方法也同样被内嵌，这在效果上等同于外层类型 **继承** 了这些方法：**将父类型放在子类型中来实现亚型**。这个机制提供了一种简单的方式来模拟经典面向对象语言中的子类和继承相关的效果，也类似 Ruby 中的混入（mixin）。
 
-下面是一个示例（可以在练习 10.8 中进一步学习）：假定有一个 `Engine` 接口类型，一个 `Car` 结构体类型，它包含一个 `Engine` 类型的匿名字段：
+下面是一个示例：假定有一个 `Engine` 接口类型，一个 `Car` 结构体类型，它包含一个 `Engine` 类型的匿名字段：
 
 ```go
 type Engine interface {
@@ -959,13 +931,6 @@ func (n *NamedPoint) Abs() float64 {
 
 结构体内嵌和自己在同一个包中的结构体时，可以彼此访问对方所有的字段和方法。
 
-**练习 10.8** inheritance_car.go
-
-创建一个上面 `Car` 和 `Engine` 可运行的例子，并且给 `Car` 类型一个 `wheelCount` 字段和一个 `numberOfWheels()` 方法。
-
-创建一个 `Mercedes` 类型，它内嵌 `Car`，并新建 `Mercedes` 的一个实例，然后调用它的方法。
-
-然后仅在 `Mercedes` 类型上创建方法 `sayHiToMerkel()` 并调用它。
 
 ## 10.6.6 如何在类型中嵌入功能
 
@@ -2123,9 +2088,6 @@ func main() {
 
     any hello is a special String!
 
-**练习 11.9** simple_interface3.go：
-
-继续 练习11.2，在它中添加一个 `gI` 函数，它不再接受 `Simpler` 类型的参数，而是接受一个空接口参数。然后通过类型断言判断参数是否是 `Simpler` 类型。最后在 `main` 使用 `gI` 取代 `fI` 函数并调用它。确保你的代码足够安全。
 
 ## 11.9.2 构建通用类型或包含不同类型变量的数组
 
@@ -2159,9 +2121,6 @@ func (p *Vector) Set(i int, e Element) {
 
 `Vector` 中存储的所有元素都是 `Element` 类型，要得到它们的原始类型（unboxing：拆箱）需要用到类型断言。TODO：The compiler rejects assertions guaranteed to fail，类型断言总是在运行时才执行，因此它会产生运行时错误。
 
-**练习 11.10** min_interface.go / minmain.go：
-
-仿照11.7中开发的 `Sorter` 接口，创建一个 `Miner` 接口并实现一些必要的操作。函数 `Min` 接受一个 `Miner` 类型变量的集合，然后计算并返回集合中最小的元素。
 
 ## 11.9.3 复制数据切片至空接口切片
 
@@ -2560,7 +2519,7 @@ func Printf(format string, args ... interface{}) (n int, err error)
 
 Printf 中的 `...` 参数为空接口类型。Printf 使用反射包来解析这个参数列表。所以，Printf 能够知道它每个参数的类型。因此格式化字符串中只有%d而没有 %u 和 %ld，因为它知道这个参数是 unsigned 还是 long。这也是为什么 Print 和 Println 在没有格式字符串的情况下还能如此漂亮地输出。
 
-为了让大家更加具体地了解 Printf 中的反射，我们实现了一个简单的通用输出函数。其中使用了 type-switch 来推导参数类型，并根据类型来输出每个参数的值（这里用了 10.7 节中练习 10.13 的部分代码）
+为了让大家更加具体地了解 Printf 中的反射，我们实现了一个简单的通用输出函数。其中使用了 type-switch 来推导参数类型，并根据类型来输出每个参数的值
 
 示例 11.15 [print.go](examples/chapter_11/print.go)：
 
@@ -2883,21 +2842,7 @@ type ReaderWriter struct {
 
 有用的接口可以在开发的过程中被归纳出来。添加新接口非常容易，因为已有的类型不用变动（仅仅需要实现新接口的方法）。已有的函数可以扩展为使用接口类型的约束性参数：通常只有函数签名需要改变。对比基于类的 OO 类型的语言在这种情况下则需要适应整个类层次结构的变化。
 
-**练习 11.11**：[map_function_interface.go](exercises/chapter_11/map_function_interface.go)：
-
-在练习 7.13 中我们定义了一个 map 函数来使用 int 切片 （map_function.go）。
-
-通过空接口和类型断言，现在我们可以写一个可以应用于许多类型的 `泛型` 的 map 函数，为 int 和 string 构建一个把 int 值加倍和连接字符串值的 map 函数 `mapFunc`。
-
-提示：为了可读性可以定义一个 interface{} 的别名，比如：type obj interface{}
-
-**练习 11.12**：[map_function_interface_var.go](exercises/chapter_11/map_function_interface_var.go)：
-
-稍微改变练习 11.9，允许 `mapFunc` 接收不定数量的 items。
-
-**练习 11.13**：[main_stack.go](exercises/chapter_11/main_stack.go)—[stack/stack_general.go](exercises/chapter_11/stack/stack_general.go)：
-
-在练习 10.10 和 10.11 中我们开发了一些栈结构类型。但是它们被限制为某种固定的内建类型。现在用一个元素类型是 interface{}（空接口）的切片开发一个通用的栈类型。
+我们开发了一些栈结构类型。但是它们被限制为某种固定的内建类型。现在用一个元素类型是 interface{}（空接口）的切片开发一个通用的栈类型。
 
 实现下面的栈方法：
 
