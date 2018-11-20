@@ -1,4 +1,4 @@
-# Notes Part 3: Array, Slice, Map
+# Notes Part 3: Array, Slice and Map
 
 # 7.1 数组 Array
 
@@ -408,8 +408,6 @@ func main() {
   The capacity of slice1 is 10  
 
 因为字符串是纯粹不可变的字节数组，它们也可以被切分成 切片。
-
-练习 7.4： fobinacci_funcarray.go: 为练习 7.3 写一个新的版本，主函数调用一个使用序列个数作为参数的函数，该函数返回一个大小为序列个数的 Fibonacci 切片。
 
 ## 7.2.4 new() 和 make() 的区别
 
