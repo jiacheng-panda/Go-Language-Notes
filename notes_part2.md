@@ -1,4 +1,4 @@
-# Notes Part 2: Conditional, Loop, Function
+# Notes Part 2: Conditional Statements, Loop and Function
 
 # 5.1 if-else 结构
 
@@ -305,7 +305,7 @@ func atoi (s string) (n int) {
 count, err := fmt.Println(x) // number of bytes printed, nil or 0, error
 ```
 
-当打印到控制台时，可以将该函数返回的错误忽略；但当输出到文件流、网络流等具有不确定因素的输出对象时，应该始终检查是否有错误发生（另见练习 6.1b）。
+当打印到控制台时，可以将该函数返回的错误忽略；但当输出到文件流、网络流等具有不确定因素的输出对象时，应该始终检查是否有错误发生。
 
 
 # 5.3 switch 结构
@@ -1104,14 +1104,6 @@ func getX2AndX3_2(input int) (x2 int, x3 int) {
 任何一个非命名返回值（使用非命名返回值是很糟的编程习惯）在 `return` 语句里面都要明确指出包含返回值的变量或是一个可计算的值（就像上面警告所指出的那样）。
 
 **尽量使用命名返回值：会使代码更清晰、更简短，同时更加容易读懂。**
-
-练习 6.1 [mult_returnval.go](exercises/chapter_6/mult_returnval.go)
-
-编写一个函数，接收两个整数，然后返回它们的和、积与差。编写两个版本，一个是非命名返回值，一个是命名返回值。
-
-练习 6.2 [error_returnval.go](exercises/chapter_6/error_returnval.go)
-
-编写一个名字为 MySqrt 的函数，计算一个 float64 类型浮点数的平方根，如果参数是一个负数的话将返回一个错误。编写两个版本，一个是非命名返回值，一个是命名返回值。
 
 ## 6.2.3 空白符（blank identifier）
 
